@@ -1,0 +1,21 @@
+{
+    "Sec-Ch-Ua": "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\"",
+    "Sec-Ch-Ua-Platform": "Linux",
+    "X-Debug": "false",
+    "X-Hd-Dc": "origin",
+    "Accept-Language": "en-US",
+    "Sec-Ch-Ua-Mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.127 Safari/537.36",
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "X-Experience-Name": "general-merchandise",
+    "X-Current-Url": "",
+    "X-Thd-Customer-Token": "",
+    "Origin": "https://www.homedepot.com",
+    "Sec-Fetch-Site": "same-site",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Dest": "empty",
+    "Referer": "https://www.homedepot.com/",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Priority": "u=1, i"
+}

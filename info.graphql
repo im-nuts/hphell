@@ -1,0 +1,820 @@
+query searchModel($storeId: String, $zipCode: String, $skipInstallServices: Boolean = true, $startIndex: Int, $pageSize: Int, $orderBy: ProductSort, $filter: ProductFilter, $skipFavoriteCount: Boolean = false, $keyword: String, $navParam: String, $storefilter: StoreFilter = ALL, $channel: Channel = DESKTOP, $additionalSearchParams: AdditionalParams, $loyaltyMembershipInput: LoyaltyMembershipInput, $dataSource: String, $skipDiscoveryZones: Boolean = true, $skipBuyitagain: Boolean = true) {
+  searchModel(
+    keyword: $keyword
+    navParam: $navParam
+    storefilter: $storefilter
+    storeId: $storeId
+    channel: $channel
+    additionalSearchParams: $additionalSearchParams
+    loyaltyMembershipInput: $loyaltyMembershipInput
+  ) {
+    metadata {
+      hasPLPBanner
+      categoryID
+      analytics {
+        semanticTokens
+        dynamicLCA
+        __typename
+      }
+      canonicalUrl
+      searchRedirect
+      clearAllRefinementsURL
+      contentType
+      h1Tag
+      isStoreDisplay
+      productCount {
+        inStore
+        __typename
+      }
+      stores {
+        storeId
+        storeName
+        address {
+          postalCode
+          __typename
+        }
+        nearByStores {
+          storeId
+          storeName
+          distance
+          address {
+            postalCode
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    products(
+      startIndex: $startIndex
+      pageSize: $pageSize
+      orderBy: $orderBy
+      filter: $filter
+    ) {
+      identifiers {
+        storeSkuNumber
+        specialOrderSku
+        canonicalUrl
+        brandName
+        itemId
+        productLabel
+        productType
+        parentId
+        modelNumber
+        isSuperSku
+        sampleId
+        __typename
+      }
+      installServices(storeId: $storeId, zipCode: $zipCode) @skip(if: $skipInstallServices) {
+        scheduleAMeasure
+        gccCarpetDesignAndOrderEligible
+        __typename
+      }
+      info {
+        sponsoredMetadata {
+          sponsoredId
+          trackSource
+          campaignId
+          placementId
+          slotId
+          __typename
+        }
+        sponsoredBeacon {
+          onClickBeacons
+          onViewBeacons
+          onClickBeacon
+          onViewBeacon
+          __typename
+        }
+        isSponsored
+        productSubType {
+          name
+          link
+          __typename
+        }
+        augmentedReality
+        globalCustomConfigurator {
+          customExperience
+          __typename
+        }
+        hidePrice
+        ecoRebate
+        quantityLimit
+        categoryHierarchy
+        sskMin
+        sskMax
+        unitOfMeasureCoverage
+        wasMaxPriceRange
+        wasMinPriceRange
+        swatches {
+          isSelected
+          itemId
+          label
+          swatchImgUrl
+          url
+          value
+          __typename
+        }
+        totalNumberOfOptions
+        customerSignal {
+          previouslyPurchased
+          __typename
+        }
+        isBuryProduct
+        isGenericProduct
+        returnable
+        samplesAvailable
+        isLiveGoodsProduct
+        classNumber
+        hasSubscription
+        productDepartment
+        __typename
+      }
+      itemId
+      dataSources
+      media {
+        images {
+          url
+          type
+          subType
+          sizes
+          __typename
+        }
+        __typename
+      }
+      pricing(storeId: $storeId) {
+        value
+        alternatePriceDisplay
+        alternate {
+          bulk {
+            pricePerUnit
+            thresholdQuantity
+            value
+            __typename
+          }
+          unit {
+            caseUnitOfMeasure
+            unitsOriginalPrice
+            unitsPerCase
+            value
+            __typename
+          }
+          __typename
+        }
+        original
+        mapAboveOriginalPrice
+        message
+        preferredPriceFlag
+        promotion {
+          type
+          description {
+            shortDesc
+            longDesc
+            __typename
+          }
+          dollarOff
+          percentageOff
+          promotionTag
+          savingsCenter
+          savingsCenterPromos
+          specialBuySavings
+          specialBuyDollarOff
+          specialBuyPercentageOff
+          __typename
+        }
+        specialBuy
+        unitOfMeasure
+        clearance {
+          value
+          dollarOff
+          percentageOff
+          unitsClearancePrice
+          __typename
+        }
+        __typename
+      }
+      reviews {
+        ratingsReviews {
+          averageRating
+          totalReviews
+          __typename
+        }
+        __typename
+      }
+      badges(storeId: $storeId) {
+        name
+        label
+        __typename
+      }
+      dataSource
+      favoriteDetail @skip(if: $skipFavoriteCount) {
+        count
+        __typename
+      }
+      taxonomy {
+        breadCrumbs {
+          label
+          __typename
+        }
+        __typename
+      }
+      details {
+        installation {
+          serviceType
+          __typename
+        }
+        collection {
+          name
+          url
+          __typename
+        }
+        __typename
+      }
+      fulfillment(storeId: $storeId, zipCode: $zipCode) {
+        anchorStoreStatus
+        anchorStoreStatusType
+        backordered
+        backorderedShipDate
+        bossExcludedShipStates
+        excludedShipStates
+        seasonStatusEligible
+        fulfillmentOptions {
+          type
+          fulfillable
+          services {
+            deliveryTimeline
+            deliveryDates {
+              startDate
+              endDate
+              __typename
+            }
+            deliveryCharge
+            dynamicEta {
+              hours
+              minutes
+              __typename
+            }
+            hasFreeShipping
+            freeDeliveryThreshold
+            locations {
+              curbsidePickupFlag
+              isBuyInStoreCheckNearBy
+              distance
+              inventory {
+                isOutOfStock
+                isInStock
+                isLimitedQuantity
+                isUnavailable
+                quantity
+                maxAllowedBopisQty
+                minAllowedBopisQty
+                __typename
+              }
+              isAnchor
+              locationId
+              state
+              storeName
+              storePhone
+              type
+              __typename
+            }
+            type
+            totalCharge
+            earliestDeliveryDate
+            deliveryMessage
+            __typename
+          }
+          __typename
+        }
+        onlineStoreStatus
+        onlineStoreStatusType
+        fulfillmentBundleMessage
+        __typename
+      }
+      availabilityType {
+        type
+        discontinued
+        buyable
+        status
+        __typename
+      }
+      bundleFlag
+      specificationGroup {
+        specifications {
+          specName
+          specValue
+          __typename
+        }
+        specTitle
+        __typename
+      }
+      bundleItems {
+        id
+        quantity
+        __typename
+      }
+      __typename
+    }
+    id
+    searchReport {
+      totalProducts
+      didYouMean
+      correctedKeyword
+      keyword
+      pageSize
+      searchUrl
+      sortBy
+      sortOrder
+      startIndex
+      __typename
+    }
+    relatedResults {
+      universalSearch {
+        title
+        __typename
+      }
+      relatedServices {
+        label
+        __typename
+      }
+      visualNavs {
+        label
+        imageId
+        webUrl
+        categoryId
+        imageURL
+        __typename
+      }
+      visualNavContainsEvents
+      relatedKeywords {
+        keyword
+        __typename
+      }
+      __typename
+    }
+    taxonomy {
+      brandLinkUrl
+      breadCrumbs {
+        browseUrl
+        creativeIconUrl
+        deselectUrl
+        dimensionId
+        dimensionName
+        label
+        refinementKey
+        url
+        __typename
+      }
+      __typename
+    }
+    templates
+    discoveryZones @skip(if: $skipDiscoveryZones) {
+      products(dataSource: $dataSource) {
+        itemId
+        dataSources
+        badges(storeId: $storeId) {
+          name
+          __typename
+        }
+        info {
+          isSponsored
+          sponsoredMetadata {
+            campaignId
+            placementId
+            slotId
+            sponsoredId
+            trackSource
+            __typename
+          }
+          sponsoredBeacon {
+            onClickBeacon
+            onViewBeacon
+            onClickBeacons
+            onViewBeacons
+            __typename
+          }
+          productSubType {
+            name
+            __typename
+          }
+          augmentedReality
+          globalCustomConfigurator {
+            customExperience
+            __typename
+          }
+          swatches {
+            isSelected
+            itemId
+            label
+            swatchImgUrl
+            url
+            value
+            __typename
+          }
+          totalNumberOfOptions
+          hidePrice
+          ecoRebate
+          quantityLimit
+          categoryHierarchy
+          sskMin
+          sskMax
+          unitOfMeasureCoverage
+          wasMaxPriceRange
+          wasMinPriceRange
+          __typename
+        }
+        identifiers {
+          canonicalUrl
+          productType
+          productLabel
+          modelNumber
+          storeSkuNumber
+          itemId
+          brandName
+          parentId
+          __typename
+        }
+        media {
+          images {
+            url
+            type
+            subType
+            sizes
+            __typename
+          }
+          __typename
+        }
+        dataSource
+        details {
+          collection {
+            name
+            url
+            __typename
+          }
+          __typename
+        }
+        pricing(storeId: $storeId) {
+          alternatePriceDisplay
+          alternate {
+            bulk {
+              pricePerUnit
+              thresholdQuantity
+              value
+              __typename
+            }
+            unit {
+              caseUnitOfMeasure
+              unitsOriginalPrice
+              unitsPerCase
+              value
+              __typename
+            }
+            __typename
+          }
+          original
+          mapAboveOriginalPrice
+          message
+          preferredPriceFlag
+          promotion {
+            type
+            description {
+              shortDesc
+              longDesc
+              __typename
+            }
+            dollarOff
+            percentageOff
+            promotionTag
+            savingsCenter
+            savingsCenterPromos
+            specialBuySavings
+            specialBuyDollarOff
+            specialBuyPercentageOff
+            __typename
+          }
+          specialBuy
+          unitOfMeasure
+          value
+          __typename
+        }
+        taxonomy {
+          breadCrumbs {
+            label
+            __typename
+          }
+          __typename
+        }
+        reviews {
+          ratingsReviews {
+            averageRating
+            totalReviews
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      metadata {
+        zone
+        zoneTitle
+        __typename
+      }
+      __typename
+    }
+    partialTemplates
+    dimensions {
+      label
+      refinements {
+        refinementKey
+        url
+        label
+        recordCount
+        selected
+        imgUrl
+        nestedRefinements {
+          label
+          url
+          recordCount
+          refinementKey
+          __typename
+        }
+        __typename
+      }
+      collapse
+      dimensionId
+      isVisualNav
+      isVisualDimension
+      isNumericFilter
+      isColorSwatch
+      nestedRefinementsLimit
+      visualNavSequence
+      __typename
+    }
+    orangeGraph {
+      universalSearchArray {
+        pods {
+          title
+          description
+          imageUrl
+          link
+          isProContent
+          recordType
+          __typename
+        }
+        info {
+          title
+          __typename
+        }
+        __typename
+      }
+      productTypes
+      intents
+      orderNumber
+      __typename
+    }
+    appliedDimensions {
+      label
+      refinements {
+        label
+        refinementKey
+        url
+        __typename
+      }
+      isNumericFilter
+      __typename
+    }
+    primaryFilters {
+      collapse
+      dimensionId
+      isVisualNav
+      isVisualDimension
+      isNumericFilter
+      isColorSwatch
+      label
+      nestedRefinementsLimit
+      refinements {
+        label
+        refinementKey
+        recordCount
+        selected
+        imgUrl
+        url
+        nestedRefinements {
+          label
+          url
+          recordCount
+          refinementKey
+          __typename
+        }
+        __typename
+      }
+      visualNavSequence
+      __typename
+    }
+    buyitagain(dataSource: $dataSource) @skip(if: $skipBuyitagain) {
+      itemId
+      dataSources
+      badges(storeId: $storeId) {
+        name
+        __typename
+      }
+      info {
+        isSponsored
+        sponsoredMetadata {
+          campaignId
+          placementId
+          slotId
+          sponsoredId
+          trackSource
+          __typename
+        }
+        sponsoredBeacon {
+          onClickBeacon
+          onViewBeacon
+          onClickBeacons
+          onViewBeacons
+          __typename
+        }
+        productSubType {
+          name
+          link
+          __typename
+        }
+        augmentedReality
+        globalCustomConfigurator {
+          customExperience
+          __typename
+        }
+        customerSignal {
+          previouslyPurchased
+          __typename
+        }
+        isBuryProduct
+        isGenericProduct
+        returnable
+        hidePrice
+        ecoRebate
+        quantityLimit
+        categoryHierarchy
+        sskMin
+        sskMax
+        unitOfMeasureCoverage
+        wasMaxPriceRange
+        wasMinPriceRange
+        __typename
+      }
+      identifiers {
+        canonicalUrl
+        productType
+        productLabel
+        modelNumber
+        storeSkuNumber
+        itemId
+        brandName
+        specialOrderSku
+        __typename
+      }
+      media {
+        images {
+          url
+          type
+          subType
+          sizes
+          __typename
+        }
+        __typename
+      }
+      details {
+        installation {
+          serviceType
+          __typename
+        }
+        collection {
+          name
+          url
+          __typename
+        }
+        __typename
+      }
+      fulfillment(storeId: $storeId, zipCode: $zipCode) {
+        anchorStoreStatus
+        anchorStoreStatusType
+        backordered
+        backorderedShipDate
+        bossExcludedShipStates
+        excludedShipStates
+        seasonStatusEligible
+        fulfillmentOptions {
+          type
+          fulfillable
+          services {
+            deliveryTimeline
+            deliveryDates {
+              startDate
+              endDate
+              __typename
+            }
+            deliveryCharge
+            dynamicEta {
+              hours
+              minutes
+              __typename
+            }
+            hasFreeShipping
+            freeDeliveryThreshold
+            locations {
+              curbsidePickupFlag
+              isBuyInStoreCheckNearBy
+              distance
+              inventory {
+                isOutOfStock
+                isInStock
+                isLimitedQuantity
+                isUnavailable
+                quantity
+                maxAllowedBopisQty
+                minAllowedBopisQty
+                __typename
+              }
+              isAnchor
+              locationId
+              state
+              storeName
+              storePhone
+              type
+              __typename
+            }
+            type
+            totalCharge
+            __typename
+          }
+          __typename
+        }
+        onlineStoreStatus
+        onlineStoreStatusType
+        __typename
+      }
+      installServices(storeId: $storeId, zipCode: $zipCode) @skip(if: $skipInstallServices) {
+        scheduleAMeasure
+        gccCarpetDesignAndOrderEligible
+        __typename
+      }
+      taxonomy {
+        breadCrumbs {
+          label
+          __typename
+        }
+        __typename
+      }
+      pricing(storeId: $storeId) {
+        alternatePriceDisplay
+        alternate {
+          bulk {
+            pricePerUnit
+            thresholdQuantity
+            value
+            __typename
+          }
+          unit {
+            caseUnitOfMeasure
+            unitsOriginalPrice
+            unitsPerCase
+            value
+            __typename
+          }
+          __typename
+        }
+        original
+        mapAboveOriginalPrice
+        message
+        preferredPriceFlag
+        promotion {
+          type
+          description {
+            shortDesc
+            longDesc
+            __typename
+          }
+          dollarOff
+          percentageOff
+          promotionTag
+          savingsCenter
+          savingsCenterPromos
+          specialBuySavings
+          specialBuyDollarOff
+          specialBuyPercentageOff
+          __typename
+        }
+        specialBuy
+        unitOfMeasure
+        value
+        __typename
+      }
+      dataSource
+      __typename
+    }
+    __typename
+  }
+}
